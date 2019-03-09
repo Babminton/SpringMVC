@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+     
+     	<bean id="english_level" class="selectTest.English">
+		<property name="coursename" >
+			<value>英语4级</value>
+		</property>
+			
+	</bean>
+    <bean id="math_level" class="selectTest.Math">
+		<!-- <constructor-arg><value>1000</value></constructor-arg>
+		<constructor-arg><value>数学</value></constructor-arg> -->
+        <constructor-arg name="testCode" value="1000"/>
+        <constructor-arg name="testname" value="数学"/>
+</bean>
+  <bean id="student" class="selectTest.Student">
+  <property name="eng" >
+		<ref bean="english_level"/><!-- eng属性配置的是English的引用 -->
+		</property>
+		<property name="math" >
+		<ref bean="math_level"/>
+		</property>
+</bean>
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
