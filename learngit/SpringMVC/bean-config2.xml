@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util.xsd">
+
+ <!-- 1. 目标类实例  Target -->
+<bean id="component" class="advice2.Component"/>
+
+<bean id="myIntroduction" class="advice2.MyIntroduction" />
+
+<!-- Advice通知器 -->
+<bean id="myAdvice1" class="org.springframework.aop.support.DefaultIntroductionAdvisor">
+<constructor-arg ref="myIntroduction" />
+<constructor-arg value="advice2.IOther" />
+
+</bean>
+<!-- 代理 Proxy -->
+	<bean id="myProxyFactoryBean" class="org.springframework.aop.framework.ProxyFactoryBean">
+	<property name="proxyInterfaces" value="advice2.IBusiness" />
+	<property name="target" ref="component" />
+	<property name="interceptorNames">
+	 <list>
+	 <value>myAdvice1</value>
+	 </list>
+	</property>
+	
+	</bean>
+
+    </beans>
