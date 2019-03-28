@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util.xsd">
+
+ <!-- 1. 目标类实例  Target -->
+	<bean id="component" class="advice1.Component" /> 
+	 
+ <!-- 2. 定义Advice通知内容--> 					
+	<bean id="beforadvice" class="advice1.LogBeforeAdvice" />	
+	<bean id="afteradvice" class="advice1.LogAfterAdivice"/>		
+	<!-- Advisor通知器-前置 -->
+	<bean id="myAdvisor1" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+	<property name="mappedName" value="business2" />
+	<property name="advice" ref="beforadvice" />
+	</bean>
+	
+		<!-- Advisor通知器 -后置 -->
+	<bean id="myAdvisor2" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+	<property name="mappedName" value="business2" />
+	<property name="advice" ref="afteradvice" />
+	</bean>
+	
+	<!-- Proxy 代理 -->
+	<bean id="myProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+	<property name="proxyInterfaces" value="advice1.IBusiness" />
+	<property name="target" ref="component" />
+	<property name="interceptorNames" >
+	 <list>
+	  <value>myAdvisor1</value>
+	  <value>myAdvisor2</value>
+	 </list>
+	</property>
+	
+	</bean>
+
+</beans>
+
