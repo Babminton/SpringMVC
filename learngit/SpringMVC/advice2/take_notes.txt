@@ -1,0 +1,13 @@
+author:zeng 20190327
+技术: Introduction的使用 --Introduction 未对象动态增加原来没有的职责
+首先书写 IBusiness接口   以及实现类Component  --目标类
+再书写动态增加的接口IOther  以及要增加的方法
+接着写MyIntroduction类  实现IntroductionInterceptor,IOther接口
+以及给增加的方法添加方法体
+
+最后书写xml文件
+ <!-- 1. 目标类实例  Target -->
+ <!-- 2. MyIntroduction的实例 --> 	
+ <!--3. Advisor通知器 -->
+ <!--4. Proxy 代理 -->
+
