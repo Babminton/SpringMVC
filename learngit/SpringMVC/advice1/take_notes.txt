@@ -1,0 +1,14 @@
+author:zeng 20190327
+技术：实现BeforeAdvice、AfterAdvice
+首先书写 IBusiness接口   以及实现类Component  --目标类
+再书写切入类 UserValidate  对应的方法
+BeforeAdvice类 在目标方法执行之前被调用  继承MethodBeforeAdvice   
+在before()方法中调用要前置的方法
+AfterAdvice类 在目标方法执行之后被调用  继承AfterReturningAdvice
+在after()方法中调用要后置的方法
+最后书写xml文件
+ <!-- 1. 目标类实例  Target -->
+ <!-- 2. 定义Advice通知内容 --> 	
+ <!--3. Advisor通知器 -->
+ <!--4. Proxy 代理 -->
+
